@@ -1,155 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class Imtihon extends StatefulWidget {
-//   const Imtihon({super.key});
-
-//   @override
-//   State<Imtihon> createState() => _ImtihonState();
-// }
-
-// class _ImtihonState extends State<Imtihon> {
-//   // TextField uchun controller yaratamiz.
-// final TextEditingController _controller = TextEditingController();
-// String _searchText = ''; // Kiritilgan matnni saqlash uchun o'zgaruvchi.
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text("Search Example"),
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           children: [
-//             // TextField - foydalanuvchi matn kiritadigan input maydon.
-//             TextField(
-// controller: _controller,
-// onChanged: (value) {
-//   setState(() {
-//     _searchText = value; // Kiritilgan matnni yangilaymiz.
-//   });
-//               },
-//               decoration: InputDecoration(
-//                 border: OutlineInputBorder(
-//                   borderRadius: BorderRadius.circular(20),
-//                 ),
-//                 prefixIcon: const Icon(Icons.search),
-//                 hintText: "Search your food...",
-//               ),
-//             ),
-//             const SizedBox(height: 20),
-//             // Kiritilgan matnni ekranda ko'rsatamiz.
-//             _searchText.isNotEmpty
-//                 ? Expanded(
-//                     child: ListView(
-//                       children: zakaz
-//                           .where((item) =>
-//                               item.foiz1!.toLowerCase().contains(_searchText.toLowerCase()))
-//                           .map((item) => _buildItemContainer(item))
-//                           .toList(),
-//                     ),
-//                   )
-//                 : const Text(
-//                     "No food selected",
-//                     style: TextStyle(fontSize: 18, color: Colors.grey),
-//                   ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-
-//   // Har bir item uchun container quramiz.
-//   Widget _buildItemContainer(B item) {
-//     return Container(
-//       margin: const EdgeInsets.symmetric(vertical: 8),
-//       padding: const EdgeInsets.all(12),
-//       decoration: BoxDecoration(
-//         color: Colors.white,
-//         borderRadius: BorderRadius.circular(10),
-//         boxShadow: [
-//           BoxShadow(
-//             color: Colors.grey.withOpacity(0.2),
-//             blurRadius: 5,
-//             spreadRadius: 2,
-//           ),
-//         ],
-//       ),
-//       child: Row(
-//         children: [
-//           Image.network(
-//             item.rasm1!,
-//             height: 50,
-//             width: 50,
-//             fit: BoxFit.cover,
-//           ),
-//           const SizedBox(width: 10),
-//           Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Text(
-//                 item.foiz1!,
-//                 style: const TextStyle(
-//                     fontSize: 18, fontWeight: FontWeight.bold),
-//               ),
-//               Text(
-//                 item.nom1!,
-//                 style: const TextStyle(
-//                   fontSize: 16,
-//                   color: Colors.grey,
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// // Zakaz uchun model klassi
-// class B {
-//   String? rasm1;
-//   String? foiz1;
-//   String? nom1;
-//   String? claim1;
-
-//   B({this.rasm1, this.foiz1, this.nom1, this.claim1});
-// }
-
-// // Mahsulotlar ro'yxati (zakaz).
-// List<B> zakaz = [
-//   B(
-//     rasm1:
-//         "https://i.pinimg.com/564x/dd/f5/90/ddf59056f0bd4c806e824b05ea684a30.jpg",
-//     foiz1: "Original Sushi",
-//     nom1: "\$26.00",
-//     claim1: "4.8",
-//   ),
-//   B(
-//     rasm1:
-//         "https://i.pinimg.com/736x/b2/74/c9/b274c9c231b88e0181050aab3026dc6c.jpg",
-//     foiz1: "Californa Roll",
-//     nom1: "\$18.00",
-//     claim1: "4.6",
-//   ),
-//   B(
-//     rasm1:
-//         "https://i.pinimg.com/564x/b6/d8/25/b6d8256761bcb11b4db98b19321c1e67.jpg",
-//     foiz1: "Salmon Roll",
-//     nom1: "\$20.00",
-//     claim1: "4.7",
-//   ),
-//   B(
-//     rasm1:
-//         "https://i.pinimg.com/736x/e6/7f/be/e67fbeb483e55a22d552c2713d8210c0.jpg",
-//     foiz1: "Dragon Roll",
-//     nom1: "\$23.00",
-//     claim1: "4.4",
-//   ),
-// ];
-
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -279,7 +127,7 @@ class _ImtihonState extends State<Imtihon> {
             const SizedBox(height: 20),
             CarouselSlider(
               options: CarouselOptions(
-                height: 170,
+                height: 220,
                 autoPlay: true,
                 enlargeCenterPage: true,
               ),
@@ -314,91 +162,104 @@ class _ImtihonState extends State<Imtihon> {
               ],
             ),
             Expanded(
-              child: GridView.builder(
-                itemCount: zakaz.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemBuilder: (context, index) {
-                  final item = zakaz[index];
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailScreen(item: item),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
+              child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: GridView.builder(
+                  itemCount: zakaz.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 25,
+                    mainAxisSpacing: 25,
+                  ),
+                  itemBuilder: (context, index) {
+                    final item = zakaz[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailScreen(item: item),
+                          ),
+                        );
+                      },
+                      child: Expanded(
+                        child: Container(
+                          // height: 150,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Icon(
-                                Icons.star,
-                                color: Colors.amber,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  Text(item.claim1!),
+                                ],
                               ),
-                              Text(item.claim1!),
-                            ],
-                          ),
-                          Container(
-                            height: 80,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                image: NetworkImage(item.rasm1!),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.foiz1!,
-                                  style: const TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 16),
+                              Center(
+                                child: Container(
+                                  height: 120,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    image: DecorationImage(
+                                      image: NetworkImage(item.rasm1!),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      item.nom1!,
+                                      item.foiz1!,
                                       style: const TextStyle(
-                                        fontSize: 20,
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 20),
                                     ),
-                                    const CircleAvatar(
-                                      radius: 15,
-                                      backgroundColor: Colors.black,
-                                      child: Icon(Icons.shopping_cart,
-                                          color: Colors.white),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          item.nom1!,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            fontStyle: FontStyle.italic,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        const CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor: Colors.black,
+                                          child: Icon(Icons.shopping_cart,
+                                              color: Colors.white),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ],
@@ -452,6 +313,8 @@ class DetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   item.foiz1!,
@@ -473,34 +336,42 @@ class DetailScreen extends StatelessWidget {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                    height: 40,
-                    width: 50,
-                    child: Image.network(
-                        "https://i.pinimg.com/736x/81/39/c9/8139c9fed6cddfb945cbb0b69be586ab.jpg")),
+                Center(
+                  child: Container(
+                      height: 40,
+                      width: 50,
+                      child: Image.network(
+                          "https://i.pinimg.com/736x/81/39/c9/8139c9fed6cddfb945cbb0b69be586ab.jpg")),
+                ),
                 Text(
                   "Salmon",
                 ),
                 SizedBox(
                   width: 25,
                 ),
-                Container(
-                    height: 40,
-                    width: 50,
-                    child: Image.network(
-                        "https://i.pinimg.com/564x/31/4e/d5/314ed5b51638fc450924e126ce48fc1f.jpg")),
+                Center(
+                  child: Container(
+                      height: 40,
+                      width: 50,
+                      child: Image.network(
+                          "https://i.pinimg.com/564x/31/4e/d5/314ed5b51638fc450924e126ce48fc1f.jpg")),
+                ),
                 Text(
                   "Sushi Rice",
                 ),
                 SizedBox(
                   width: 25,
                 ),
-                Container(
-                    height: 40,
-                    width: 50,
-                    child: Image.network(
-                        "https://i.pinimg.com/564x/33/c1/50/33c150f7fca6cad8f8f4239d7378fd50.jpg")),
+                Center(
+                  child: Container(
+                      height: 40,
+                      width: 50,
+                      child: Image.network(
+                          "https://i.pinimg.com/564x/33/c1/50/33c150f7fca6cad8f8f4239d7378fd50.jpg")),
+                ),
                 Text(
                   "pepsi",
                 ),
@@ -549,47 +420,51 @@ class DetailScreen extends StatelessWidget {
                 SizedBox(
                   width: 25,
                 ),
-                Column(
-                  children: [
-                    Text(
-                      item.nom1 ?? "",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic,
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        item.nom1 ?? "",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Total price",
-                    ),
-                  ],
+                      Text(
+                        "Total price",
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   width: 80,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => page3(),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => page3(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          25,
+                        ),
+                        color: Colors.black,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 50,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        25,
-                      ),
-                      color: Colors.black,
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Plance Order",
-                        style: TextStyle(
-                          color: Colors.white,
+                      child: Center(
+                        child: Text(
+                          "Plance Order",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -622,6 +497,7 @@ class A {
 
 Widget sushii(A item) {
   return Container(
+    width: double.infinity,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
       image:
@@ -666,6 +542,8 @@ class _page3State extends State<page3> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: 20,
@@ -691,7 +569,7 @@ class _page3State extends State<page3> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               height: 100,
-              width: 350,
+              width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                   20,
@@ -700,6 +578,8 @@ class _page3State extends State<page3> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       height: 100,
@@ -776,7 +656,7 @@ class _page3State extends State<page3> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               height: 100,
-              width: 350,
+              width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                   20,
@@ -785,6 +665,8 @@ class _page3State extends State<page3> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       height: 100,
@@ -861,7 +743,7 @@ class _page3State extends State<page3> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               height: 100,
-              width: 350,
+              width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                   20,
@@ -870,6 +752,8 @@ class _page3State extends State<page3> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       height: 100,
@@ -945,6 +829,8 @@ class _page3State extends State<page3> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   width: 20,
@@ -992,6 +878,8 @@ class _page3State extends State<page3> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   "Item total:",
@@ -1008,6 +896,8 @@ class _page3State extends State<page3> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   "Delivery:",
@@ -1027,6 +917,8 @@ class _page3State extends State<page3> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   "Total",
@@ -1047,25 +939,31 @@ class _page3State extends State<page3> {
           ),
           Padding(
             padding: const EdgeInsets.all(15),
-            child: Container(
-              height: 70,
-              width: 350,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(
-                  50,
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  "Payment",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w900,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: 70,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(
+                      50,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Payment",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
         ],
